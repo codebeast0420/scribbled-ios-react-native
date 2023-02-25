@@ -8,18 +8,17 @@ import {
 	useColorScheme,
 	View,
 } from 'react-native';
-import LineMenu from "../components/home/lineMenu";
 import { Image } from "react-native";
 
 const Home = () => {
 
-	const coin = require('./coin-small.png');
+	const lineMenu = require('../../assets/home/line-menu.png');
 	return (
 		<SafeAreaView>
 			<View style={styles.navbar}>
 				<Text>Scribble2img</Text>
-				<LineMenu />
-				<Image source={coin}/>
+				<Image source={require('../../assets/home/line-menu.png')} />
+				<Image source={require('../../assets/home/coin-small.png')} />
 			</View>
 		</SafeAreaView>
 	)
