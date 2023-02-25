@@ -11,27 +11,19 @@ import {
 import { Image } from "react-native";
 
 const Home = () => {
-
-	const lineMenu = require('../../assets/home/line-menu.png');
 	return (
 		<SafeAreaView>
-			<View style={styles.navbar}>
-				<Text>Scribble2img</Text>
+			<View className="d-flex flex-row h-[44px] items-center justify-between px-[15px]" >
 				<Image source={require('../../assets/home/line-menu.png')} />
-				<Image source={require('../../assets/home/coin-small.png')} />
+				<Text>Scribble2img</Text>
+				<View className="d-flex flex-row items-center">
+					<Image source={require('../../assets/home/coin-small.png')} />
+					<Image source={require('../../assets/home/md-add.png')} />
+				</View>
 			</View>
 		</SafeAreaView>
 	)
 }
 
-const styles = StyleSheet.create({
-	navbar: {
-		backgroundColor: '#F8F8F8',
-		height: 44,
-		width: '100%',
-		display: 'flex',
-		alignItems: "center"
-	}
-})
 
 export default Home;
