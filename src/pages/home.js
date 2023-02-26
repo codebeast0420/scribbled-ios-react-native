@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import {
 	SafeAreaView,
 	TouchableOpacity,
-	TouchableHighlight,
+	TextInput,
 	Text,
-	Switch,
 	View
 } from 'react-native';
 import { Image } from "react-native";
+import ControlBar from "../components/home/controlBar";
 import Header from "../components/home/header";
 
 const Home = () => {
-	const [isEnabled, setIsEnabled] = useState(false);
-	const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+	const [text, onChangeText] = useState('Useless Text');
+	const [number, onChangeNumber] = useState('');
 	return (
 		<SafeAreaView className='bg-white'>
 			<Header />
@@ -29,27 +29,18 @@ const Home = () => {
 					<Image source={require('../../assets/home/dog.png')} />
 					<Text className='text-[#9A9A9A] text-[20px]'>Draw something by texts</Text>
 				</View>
-				<View className='w-full d-flex flex-row items-center mt-[15px] justify-between'>
-					<View className='d-flex flex-row'>
-						<TouchableOpacity className='d-flex flex-row items-center'>
-							<Image source={require('../../assets/home/back.png')} />
-							<Text className='px-[5px] text-[#101010]'>Undo</Text>
-						</TouchableOpacity>
-						<TouchableOpacity className='d-flex flex-row items-center ml-[50px]'>
-							<Image source={require('../../assets/home/clear.png')} />
-							<Text className='px-[5px] text-[#101010]'>Clear</Text>
-						</TouchableOpacity>
-					</View>
-					<View className='d-flex flex-row items-center'>
-						<Text className='text-[16px] text-[#101010]'>Depict</Text>
-						<Switch
-							trackColor={{ false: '#BBBBBB', true: '#242222' }}
-							thumbColor={'#FFFFFF'}
-							ios_backgroundColor="#3e3e3e"
-							onValueChange={toggleSwitch}
-							value={isEnabled}
-						/>
-					</View>
+				<ControlBar />
+				<View className='d-flex flex-row items-center w-full mt-[30px]'>
+					<TextInput
+						onChangeText={onChangeNumber}
+						value={number}
+						placeholder="useless placeholder"
+						keyboardType="numeric"
+						className='border-[1px] border-[#BBBBBB] rounded-l-md text-[18px] text-[#101010] w-5/6 h-[56px]'
+					/>
+					<TouchableOpacity className='bg-[#242222] rounded-r-md w-1/6 h-[56px]  d-flex flex-row items-center justify-center'>
+						<Text className='text-white text-center text-[18px]'>Go</Text>
+					</TouchableOpacity>
 				</View>
 			</View>
 		</SafeAreaView>
