@@ -20,7 +20,7 @@ const Home = () => {
 			<ScrollView
 				contentInsetAdjustmentBehavior="automatic"
 			>
-				<View className='mt-[30px] d-flex flex-column items-center px-[15px]'>
+				<View className='mt-[30px] d-flex flex-col items-center px-[15px]'>
 					<View className='d-flex flex-row rounded-sm'>
 						<TouchableOpacity className='bg-[#242222] w-[80px] h-[30px] d-flex flex-row items-center justify-center rounded-bl-sm rounded-tl-sm' onPress={() => setIsMy(true)}>
 							<Text className='text-white text-[14px]'>My</Text>

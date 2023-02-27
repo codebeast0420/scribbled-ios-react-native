@@ -7,7 +7,7 @@ const Result = () => {
 	const [number, onChangeNumber] = useState('');
 	return (
 		<View className='w-full'>
-			<View className='w-full mt-[20px] border-[1px] border-[#BBBBBB] d-flex flex-column items-center py-[50px]'>
+			<View className='w-full mt-[20px] border-[1px] border-[#BBBBBB] d-flex flex-col items-center py-[50px]'>
 				<Image source={require('../../../assets/home/dog.png')} />
 				<Text className='text-[#9A9A9A] text-[20px]'>Draw something by texts</Text>
 			</View>
