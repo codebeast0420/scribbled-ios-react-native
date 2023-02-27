@@ -23,6 +23,7 @@ import {
 import Buying from './src/pages/buying';
 import Home from './src/pages/home';
 import More from './src/pages/more';
+import SignIn from './src/pages/signin';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -36,7 +37,8 @@ const App = () => {
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       {/* <Homes /> */}
       {/* <More /> */}
-      <Buying />
+      {/* <Buying /> */}
+      <SignIn />
     </SafeAreaView>
   );
 };
