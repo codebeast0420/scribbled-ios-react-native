@@ -20,6 +20,7 @@ import {
 import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
+import Buying from './src/pages/buying';
 import Home from './src/pages/home';
 import More from './src/pages/more';
 
@@ -34,7 +35,8 @@ const App = () => {
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       {/* <Homes /> */}
-      <More />
+      {/* <More /> */}
+      <Buying />
     </SafeAreaView>
   );
 };
