@@ -18,7 +18,7 @@ const DiscoverBar = ({ follow }) => {
 					<Text className='text-[14px] text-[#101010] ml-[7px]'>{follow}</Text>
 				</View>
 					: <Image source={require('../../../assets/home/no-follow.png')} />}
-				<Image source={require('../../../assets/home/tiktok.png')} />
+				<Image source={require('../../../assets/home/dots.png')} />
 			</View>
 		</View>
 	)
