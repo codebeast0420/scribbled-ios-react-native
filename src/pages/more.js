@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Image, Text, FlatList, TouchableOpacity } from 'react-native'
+import { SafeAreaView, View, Image, Text, FlatList, TouchableOpacity } from 'react-native'
 import Header from '../components/more/header'
 import TopPart from '../components/more/topPart'
 import { useNavigation } from '@react-navigation/native'
@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native'
 const More = () => {
 	const navigation = useNavigation();
 	return (
-		<View className='bg-white h-full'>
+		<SafeAreaView className='bg-white h-full'>
 			<Header />
 			<View className='px-[15px]'>
 				<TopPart />
@@ -124,7 +124,7 @@ const More = () => {
 					</TouchableOpacity>
 				</View>
 			</View>
-		</View>
+		</SafeAreaView>
 	)
 }
 

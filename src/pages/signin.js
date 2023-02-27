@@ -1,11 +1,11 @@
 import React from "react";
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import { SafeAreaView, View, Text, TouchableOpacity, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 const SignIn = () => {
 	const navigation = useNavigation();
 	return (
-		<View className='d-flex flex-col items-center bg-white h-[100%]'>
+		<SafeAreaView className='d-flex flex-col items-center bg-white h-[100%]'>
 			<View className='mt-[40px] w-[120px] h-[120px] border-[1px] border-[#BBBBBB] rounded-[24px]'></View>
 			<Text className='mt-[15px] text-[#101010] text-[28px]'>Scribble2img</Text>
 			<Text className='text-[#837E7E] text-[28px] mt-[25px]'>Turn your sketch</Text>
@@ -17,7 +17,7 @@ const SignIn = () => {
 			<TouchableOpacity onPress={() => navigation.navigate('Home')}>
 				<Image className='mt-[50px]' source={require('../../assets/login/close.png')} />
 			</TouchableOpacity>
-		</View>
+		</SafeAreaView>
 	)
 }
 
