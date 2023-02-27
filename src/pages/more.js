@@ -2,10 +2,12 @@ import React from 'react'
 import { View, Image, Text, FlatList, TouchableOpacity } from 'react-native'
 import Header from '../components/more/header'
 import TopPart from '../components/more/topPart'
+import { useNavigation } from '@react-navigation/native'
 
 const More = () => {
+	const navigation = useNavigation();
 	return (
-		<View className='bg-white'>
+		<View className='bg-white h-full'>
 			<Header />
 			<View className='px-[15px]'>
 				<TopPart />
@@ -39,7 +41,7 @@ const More = () => {
 							<Image source={require('../../assets/more/funds.png')} />
 							<Text className='px-[15px] text-[#101010] text-[14px]'>More coins</Text>
 						</View>
-						<TouchableOpacity className='w-[97px] d-flex flex-row items-center justify-between bg-[#F20303] rounded-[6px] px-[7px] py-[3px]'>
+						<TouchableOpacity className='w-[97px] d-flex flex-row items-center justify-between bg-[#F20303] rounded-[6px] px-[7px] py-[3px]' onPress={() => navigation.navigate('Buying')}>
 							<Text className='text-white text-[12px]'>50% off</Text>
 							<Image source={require('../../assets/home/coin-small.png')} />
 						</TouchableOpacity>
@@ -114,7 +116,7 @@ const More = () => {
 					<Text className='text-[#F20303] text-[14px] mt-[5px]'>Share(\,)每个用户每天可获得一次奖励,点击后变为 Go &gt;</Text>
 				</View>
 				<View className='d-flex flex-col items-center mt-[40px]'>
-					<TouchableOpacity className='bg-[#242222] border-[1px] border-[#BBBBBB] w-[134px] py-[5px] rounded-[4px]'>
+					<TouchableOpacity onPress={() => navigation.navigate('Sign')} className='bg-[#242222] border-[1px] border-[#BBBBBB] w-[134px] py-[5px] rounded-[4px]'>
 						<Text className='text-center text-white'>Sign Out</Text>
 					</TouchableOpacity>
 					<TouchableOpacity className='bg-[#9A9A9A] border-[1px] border-[#BBBBBB] w-[134px] py-[5px] rounded-[4px] mt-[15px]'>
