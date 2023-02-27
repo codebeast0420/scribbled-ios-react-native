@@ -1,11 +1,11 @@
 import React from 'react'
-import { View, Text, TouchableOpacity, Image } from 'react-native'
+import { SafeAreaView, View, Text, TouchableOpacity, Image } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
 const Buying = () => {
 	const navigation = useNavigation();
 	return (
-		<View className='bg-white h-full'>
+		<SafeAreaView className='bg-white h-full'>
 			<View className='w-full h-[44px] d-flex flex-row items-center'>
 				<TouchableOpacity onPress={() => navigation.navigate('More')}>
 					<Image source={require('../../assets/buying/left-arrow.png')} />
@@ -79,7 +79,7 @@ const Buying = () => {
 					</View>
 				</View>
 			</View>
-		</View>
+		</SafeAreaView>
 	)
 }
 
