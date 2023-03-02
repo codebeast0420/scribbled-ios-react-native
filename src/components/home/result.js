@@ -17,7 +17,7 @@ const Result = () => {
 					onChangeText={onChangeNumber}
 					value={number}
 					placeholder="Describe about you want"
-					keyboardType="numeric"
+					keyboardType="default"
 					className='border-[1px] border-[#BBBBBB] rounded-l-md text-[18px] text-[#101010] w-5/6 h-[56px]'
 				/>
 				<TouchableOpacity className='bg-[#242222] rounded-r-md w-1/6 h-[56px]  d-flex flex-row items-center justify-center'>
