@@ -15,7 +15,7 @@ import Result from "../components/home/result";
 const Home = () => {
 	const [isMy, setIsMy] = useState(true);
 	return (
-		<SafeAreaView className='bg-white'>
+		<SafeAreaView className='bg-white h-[100%]'>
 			<Header />
 			<ScrollView
 				contentInsetAdjustmentBehavior="automatic"
