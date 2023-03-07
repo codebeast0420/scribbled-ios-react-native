@@ -19,6 +19,8 @@ target 'scribbled' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  pod 'react-native-view-shot', :path => '../node_modules/react-native-view-shot'
+
   target 'scribbledTests' do
     inherit! :complete
     # Pods for testing
