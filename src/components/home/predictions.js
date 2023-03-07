@@ -67,7 +67,7 @@ export function Prediction({ prediction, imgUrl }) {
             </View>
           </View>
           <View>
-            <Text className='my-[15px] text-black text-[20px]'>&ldquo;{prediction.input.prompt}&rdquo;</Text>
+            <Text className='my-[15px] text-black text-[20px]'>{prediction.input.prompt}</Text>
             <SocialBar />
           </View>
         </View>
