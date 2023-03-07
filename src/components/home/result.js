@@ -5,6 +5,8 @@ import SocialBar from "./socialBar";
 import { Path, Svg } from 'react-native-svg';
 import naughtyWords from "naughty-words";
 import Predictions from "./predictions";
+import ViewShot, { captureRef } from "react-native-view-shot";
+// import uploadFile from "../../lib/upload";
 
 const Result = () => {
 	const [number, onChangeNumber] = useState('');
@@ -17,6 +19,7 @@ const Result = () => {
 	const [predictions, setPredictions] = useState({});
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [scribble, setScribble] = useState(null);
+	const [fileUrl, setFileUrl] = useState("");
 
 	//ref for snapshot
 	const ref = useRef(null);
@@ -63,6 +66,14 @@ const Result = () => {
 
 		setError(null);
 		setIsProcessing(true);
+
+		await captureRef(ref, {
+      format: 'png',
+      quality: 0.8,
+    }).then(
+      uri => setFileUrl(uri),
+      error => console.error('Oops, snapshot failed', error),
+    );
 
 		const body = {
 			prompt,
@@ -126,25 +137,32 @@ const Result = () => {
 				<View
 					onTouchMove={onTouchMove}
 					onTouchEnd={onTouchEnd}>
-					<Svg height={'100px'} width={width}>
-						<Path
-							d={currentPath.join('')}
-							stroke={'red'}
-							fill={'transparent'}
-							strokeWidth={2}
-						/>
+					<ViewShot
+						ref={ref}
+						options={{
+							format: 'png',
+							quality: 1,
+						}}>
+						<Svg height={'100px'} width={width}>
+							<Path
+								d={currentPath.join('')}
+								stroke={'red'}
+								fill={'transparent'}
+								strokeWidth={2}
+							/>
 
-						{paths.length > 0 &&
-							paths.map((item, index) => (
-								<Path
-									key={`path-${index}`}
-									d={item.join('')}
-									stroke={'red'}
-									strokeWidth={2}
-									fill={'transparent'}
-								/>
-							))}
-					</Svg>
+							{paths.length > 0 &&
+								paths.map((item, index) => (
+									<Path
+										key={`path-${index}`}
+										d={item.join('')}
+										stroke={'red'}
+										strokeWidth={2}
+										fill={'transparent'}
+									/>
+								))}
+						</Svg>
+					</ViewShot>
 				</View>
 			</View>
 			<ControlBar />
@@ -165,23 +183,8 @@ const Result = () => {
 					predictions={predictions}
 					isProcessing={isProcessing}
 					submissionCount={submissionCount}
+					imgUrl={fileUrl}
 				/>
-				// <View className='mt-[30px]'>
-				// 	<Text className='text-black text-[28px] text-center'>Results</Text>
-				// 	<View className='mt-[20px]'>
-				// 		<Image source={require('../../../assets/home/owl.png')}></Image>
-				// 		<View>
-				// 			<Text className='my-[15px] text-black text-[20px]'>a goofy owl</Text>
-				// 			<SocialBar />
-				// 		</View>
-				// 	</View>
-				// 	<View className='mt-[20px] mb-[110px]'>
-				// 		<Image source={require('../../../assets/home/starfish.png')}></Image>
-				// 		<View>
-				// 			<SocialBar />
-				// 		</View>
-				// 	</View>
-				// </View>
 			)}
 		</View>
 	)
