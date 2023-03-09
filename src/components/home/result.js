@@ -68,12 +68,12 @@ const Result = () => {
 		setIsProcessing(true);
 
 		await captureRef(ref, {
-      format: 'png',
-      quality: 0.8,
-    }).then(
-      uri => setFileUrl(uri),
-      error => console.error('Oops, snapshot failed', error),
-    );
+			format: 'png',
+			quality: 0.8,
+		}).then(
+			uri => setFileUrl(uri),
+			error => console.error('Oops, snapshot failed', error),
+		);
 
 		const body = {
 			prompt,
@@ -131,7 +131,7 @@ const Result = () => {
 
 	return (
 		<View className='w-full h-[100%]'>
-			<View className='w-full mt-[20px] border-[1px] border-[#BBBBBB] d-flex flex-col items-center py-[50px]'>
+			<View className='w-full mt-[20px] bg-white border-[1px] border-[#BBBBBB] d-flex flex-col items-center py-[50px]'>
 				{/* <Image source={require('../../../assets/home/dog.png')} />
 				<Text className='text-[#9A9A9A] text-[20px]'>Draw something by texts</Text> */}
 				<View
@@ -190,25 +190,5 @@ const Result = () => {
 	)
 }
 
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
-	svgContainer: {
-		borderColor: 'black',
-		backgroundColor: 'white',
-		borderWidth: 1,
-	},
-	saveButton: {
-		height: 40,
-		width: 100,
-		borderWidth: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-		marginTop: 10,
-	},
-});
 
 export default Result;

@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
-import { View, Image, Text } from "react-native";
+import { View, Image, Text, StyleSheet } from "react-native";
 import SocialBar from "./socialBar";
 
 export default function Predictions({ predictions, submissionCount, imgUrl }) {
@@ -45,7 +45,8 @@ export function Prediction({ prediction, imgUrl }) {
     <View className='mt-[-10px] mb-[30px]'>
       <View className='mt-[30px]'>
         <View className='mt-[20px]'>
-          <View className='d-flex flex-row'>
+          <View className='d-flex flex-row bg-white p-[15px]'
+          style={styles.box}>
             <View className="w-1/2 aspect-square relative border">
               <Image
                 source={{ uri: imgUrl }}
@@ -75,3 +76,18 @@ export function Prediction({ prediction, imgUrl }) {
     </View>
   );
 }
+
+
+const styles = StyleSheet.create({
+  box: {
+    backgroundColor: '#ffffff',
+    borderRadius: 5,
+    // Android
+    elevation: 5,
+    // iOS
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+  },
+});
