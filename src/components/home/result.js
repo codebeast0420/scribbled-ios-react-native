@@ -19,7 +19,7 @@ const Result = () => {
 	const [predictions, setPredictions] = useState({});
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [scribble, setScribble] = useState(null);
-	const [fileUrl, setFileUrl] = useState("");
+	const [promtImg, setPromtImg] = useState([]);
 
 	//ref for snapshot
 	const ref = useRef(null);
@@ -55,6 +55,7 @@ const Result = () => {
 		return new Promise(resolve => setTimeout(resolve, ms));
 	}
 
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
@@ -71,7 +72,11 @@ const Result = () => {
 			format: 'png',
 			quality: 0.8,
 		}).then(
-			uri => setFileUrl(uri),
+			uri => {
+				const temp = [...promtImg];
+				temp.push(uri);
+				setPromtImg(temp)
+			},
 			error => console.error('Oops, snapshot failed', error),
 		);
 
@@ -88,12 +93,13 @@ const Result = () => {
 			body: JSON.stringify(body),
 		});
 		let prediction = await response.json();
-		// console.log("prediction", prediction);
 
 		setPredictions((predictions) => ({
 			...predictions,
 			[prediction.id]: prediction,
 		}));
+
+		setSubmissionCount(submissionCount + 1);
 
 		if (response.status !== 201) {
 			setError(prediction.detail);
@@ -132,8 +138,6 @@ const Result = () => {
 	return (
 		<View className='w-full h-[100%]'>
 			<View className='w-full mt-[20px] bg-white border-[1px] border-[#BBBBBB] d-flex flex-col items-center py-[50px]'>
-				{/* <Image source={require('../../../assets/home/dog.png')} />
-				<Text className='text-[#9A9A9A] text-[20px]'>Draw something by texts</Text> */}
 				<View
 					onTouchMove={onTouchMove}
 					onTouchEnd={onTouchEnd}>
@@ -165,7 +169,7 @@ const Result = () => {
 					</ViewShot>
 				</View>
 			</View>
-			<ControlBar />
+			<ControlBar setPath={setPaths} path={paths} />
 			<View className='d-flex flex-row items-center w-full mt-[30px]'>
 				<TextInput
 					onChangeText={onChangeNumber}
@@ -183,7 +187,7 @@ const Result = () => {
 					predictions={predictions}
 					isProcessing={isProcessing}
 					submissionCount={submissionCount}
-					imgUrl={fileUrl}
+					imgUrl={promtImg}
 				/>
 			)}
 		</View>

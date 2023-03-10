@@ -3,22 +3,14 @@ import { View, Image, Text, StyleSheet } from "react-native";
 import SocialBar from "./socialBar";
 
 export default function Predictions({ predictions, submissionCount, imgUrl }) {
-  const scrollRef = useRef(null);
 
-  useEffect(() => {
-    if (submissionCount > 0) {
-      scrollRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [predictions, submissionCount]);
-
-  // if (submissionCount === 0) return;
 
   return (
     <View className="mt-[30px]">
       <Text className='text-black text-[28px] text-center'>Results</Text>
       {submissionCount > Object.keys(predictions).length && (
         <View className="pb-10 mx-auto w-full text-center">
-          <View className="pt-10" ref={scrollRef} />
+          <View className="pt-10" />
         </View>
       )}
       {Object.values(predictions)
@@ -28,9 +20,9 @@ export default function Predictions({ predictions, submissionCount, imgUrl }) {
           <Fragment key={prediction.id}>
             {index === 0 &&
               submissionCount == Object.keys(predictions).length && (
-                <View ref={scrollRef} />
+                <View />
               )}
-            <Prediction prediction={prediction} imgUrl={imgUrl} />
+            <Prediction prediction={prediction} imgUrl={imgUrl[submissionCount - index - 1]} />
           </Fragment>
         ))}
     </View>
@@ -46,7 +38,7 @@ export function Prediction({ prediction, imgUrl }) {
       <View className='mt-[30px]'>
         <View className='mt-[20px]'>
           <View className='d-flex flex-row bg-white p-[15px]'
-          style={styles.box}>
+            style={styles.box}>
             <View className="w-1/2 aspect-square relative border">
               <Image
                 source={{ uri: imgUrl }}
