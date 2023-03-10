@@ -20,11 +20,13 @@ const Result = () => {
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [scribble, setScribble] = useState(null);
 	const [promtImg, setPromtImg] = useState([]);
+	const [scrollEnabled, setScrollEnabled] = useState(true);
 
 	//ref for snapshot
 	const ref = useRef(null);
 
 	const onTouchMove = (event) => {
+		setScrollEnabled(false)
 		const newPath = [...currentPath];
 
 		//get current user touches position
@@ -49,6 +51,7 @@ const Result = () => {
 		currentPaths.push(newPath);
 		setPaths(currentPaths);
 		setCurrentPath([]);
+		setScrollEnabled(true)
 	};
 
 	function sleep(ms) {
@@ -139,8 +142,14 @@ const Result = () => {
 		<View className='w-full h-[100%]'>
 			<View className='w-full mt-[20px] bg-white border-[1px] border-[#BBBBBB] d-flex flex-col items-center py-[50px]'>
 				<View
+					onStartShouldSetResponder={() => true}
+					onMoveShouldSetResponder={() => true}
+					onTouchStart={() => setScrollEnabled(false)}
 					onTouchMove={onTouchMove}
-					onTouchEnd={onTouchEnd}>
+					onTouchEnd={onTouchEnd}
+					onResponderTerminationRequest={() => true}
+					scrollEnabled={scrollEnabled}
+				>
 					<ViewShot
 						ref={ref}
 						options={{
