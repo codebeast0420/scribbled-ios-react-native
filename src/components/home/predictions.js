@@ -1,13 +1,18 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import { View, Image, Text, StyleSheet } from "react-native";
+import DiscoverBar from "./discoverBar";
 import SocialBar from "./socialBar";
 
-export default function Predictions({ predictions, submissionCount, imgUrl }) {
-
+export default function Predictions({
+  predictions,
+  submissionCount,
+  imgUrl,
+  discover
+}) {
 
   return (
     <View className="mt-[30px]">
-      <Text className='text-black text-[28px] text-center'>Results</Text>
+      {imgUrl.length > 0 && (<Text className='text-black text-[28px] text-center'>Results</Text>)}
       {submissionCount > Object.keys(predictions).length && (
         <View className="pb-10 mx-auto w-full text-center">
           <View className="pt-10" />
@@ -22,14 +27,14 @@ export default function Predictions({ predictions, submissionCount, imgUrl }) {
               submissionCount == Object.keys(predictions).length && (
                 <View />
               )}
-            <Prediction prediction={prediction} imgUrl={imgUrl[submissionCount - index - 1]} />
+            <Prediction prediction={prediction} imgUrl={imgUrl[submissionCount - index - 1]} discover={discover} />
           </Fragment>
         ))}
     </View>
   );
 }
 
-export function Prediction({ prediction, imgUrl }) {
+export function Prediction({ prediction, imgUrl, discover }) {
 
   if (!prediction) return null;
 
@@ -61,7 +66,7 @@ export function Prediction({ prediction, imgUrl }) {
           </View>
           <View>
             <Text className='my-[15px] text-black text-[20px]'>{prediction.input.prompt}</Text>
-            <SocialBar />
+            {discover ? <DiscoverBar follow={58} prompt={prediction.input.prompt} /> : <SocialBar />}
           </View>
         </View>
       </View>

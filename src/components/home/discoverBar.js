@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Image, Text } from "react-native";
 
-const DiscoverBar = ({ follow }) => {
+const DiscoverBar = ({ follow, prompt }) => {
 	return (
 		<View>
 			<View className='d-flex flex-row justify-between items-center'>
@@ -9,7 +9,7 @@ const DiscoverBar = ({ follow }) => {
 					<Image source={require('../../../assets/home/avatar.png')} />
 					<Text className='ml-[5px] text-[#101010] text-[14px]'>Username</Text>
 				</View>
-				<Text className='my-[15px] text-black text-[20px]'>a goofy owl</Text>
+				<Text className='my-[15px] text-black text-[20px]'>{prompt}</Text>
 			</View>
 			<View className='d-flex flex-row justify-between my-[10px]'>
 				<Image source={require('../../../assets/home/share.png')} />

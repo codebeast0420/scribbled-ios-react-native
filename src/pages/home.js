@@ -14,6 +14,10 @@ import Result from "../components/home/result";
 
 const Home = () => {
 	const [isMy, setIsMy] = useState(true);
+	const [predictions, setPredictions] = useState({});
+	const [promtImg, setPromtImg] = useState([]);
+	const [submissionCount, setSubmissionCount] = useState(0);
+
 	return (
 		<SafeAreaView className='h-[100%]'>
 			<Header />
@@ -22,14 +26,31 @@ const Home = () => {
 			>
 				<View className='mt-[30px] d-flex flex-col items-center px-[15px]'>
 					<View className='d-flex flex-row rounded-sm'>
-						<TouchableOpacity className='bg-[#242222] w-[80px] h-[30px] d-flex flex-row items-center justify-center rounded-bl-sm rounded-tl-sm' onPress={() => setIsMy(true)}>
-							<Text className='text-white text-[14px]'>My</Text>
+						<TouchableOpacity className={`${isMy ? 'bg-[#242222]' : 'bg-white'}  border-[#BBBBBB] border-[1px] w-[80px] h-[30px] d-flex flex-row items-center justify-center rounded-bl-sm rounded-tl-sm`} onPress={() => setIsMy(true)}>
+							<Text className={`${isMy ? 'text-white' : 'text-black'} text-[14px]`}>My</Text>
 						</TouchableOpacity>
-						<TouchableOpacity className='border-[#BBBBBB] border-[1px] bg-white w-[80px] h-[30px] d-flex flex-row items-center justify-center rounded-br-sm rounded-tr-sm' onPress={() => setIsMy(false)}>
-							<Text className='text-black text-[14px]'>Discover</Text>
+						<TouchableOpacity className={`${!isMy ? 'bg-[#242222]' : 'bg-white'} border-[#BBBBBB] border-[1px] w-[80px] h-[30px] d-flex flex-row items-center justify-center rounded-br-sm rounded-tr-sm`} onPress={() => setIsMy(false)}>
+							<Text className={`${!isMy ? 'text-white' : 'text-black'} text-[14px]`}>Discover</Text>
 						</TouchableOpacity>
 					</View>
-					{isMy ? <Result /> : <Discover />}
+					{isMy ?
+						<Result
+							predictions={predictions}
+							setPredictions={setPredictions}
+							promtImg={promtImg}
+							setPromtImg={setPromtImg}
+							submissionCount={submissionCount}
+							setSubmissionCount={setSubmissionCount}
+						/> :
+						<Discover
+							predictions={predictions}
+							setPredictions={setPredictions}
+							promtImg={promtImg}
+							setPromtImg={setPromtImg}
+							submissionCount={submissionCount}
+							setSubmissionCount={setSubmissionCount}
+						/>
+					}
 				</View>
 			</ScrollView>
 		</SafeAreaView>
