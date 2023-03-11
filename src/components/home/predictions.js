@@ -65,7 +65,7 @@ export function Prediction({ prediction, imgUrl, discover }) {
             </View>
           </View>
           <View>
-            <Text className='my-[15px] text-black text-[20px]'>{prediction.input.prompt}</Text>
+            {!discover && (<Text className='my-[15px] text-black text-[20px]'>{prediction.input.prompt}</Text>)}
             {discover ? <DiscoverBar follow={58} prompt={prediction.input.prompt} /> : <SocialBar />}
           </View>
         </View>
