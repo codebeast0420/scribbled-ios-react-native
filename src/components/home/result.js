@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput, Dimensions, Alert, Pressable } from 'react-native'
 import ControlBar from "./controlBar";
 import SocialBar from "./socialBar";
@@ -8,23 +8,26 @@ import Predictions from "./predictions";
 import ViewShot, { captureRef } from "react-native-view-shot";
 // import uploadFile from "../../lib/upload";
 
-const Result = () => {
+const Result = ({
+	predictions,
+	setPredictions,
+	promtImg,
+	setPromtImg,
+	submissionCount,
+	setSubmissionCount }) => {
 	const [number, onChangeNumber] = useState('');
 	const { height, width } = Dimensions.get('window');
 	const [currentPath, setCurrentPath] = useState([]);
 	const [paths, setPaths] = useState([]);
-	const [result, setResult] = useState(false);
 	const [error, setError] = useState(null);
-	const [submissionCount, setSubmissionCount] = useState(0);
-	const [predictions, setPredictions] = useState({});
 	const [isProcessing, setIsProcessing] = useState(false);
-	const [scribble, setScribble] = useState(null);
-	const [promtImg, setPromtImg] = useState([]);
+	const [scrollEnabled, setScrollEnabled] = useState(true);
 
 	//ref for snapshot
 	const ref = useRef(null);
 
 	const onTouchMove = (event) => {
+		setScrollEnabled(false)
 		const newPath = [...currentPath];
 
 		//get current user touches position
@@ -49,6 +52,7 @@ const Result = () => {
 		currentPaths.push(newPath);
 		setPaths(currentPaths);
 		setCurrentPath([]);
+		setScrollEnabled(true)
 	};
 
 	function sleep(ms) {
@@ -131,7 +135,6 @@ const Result = () => {
 		}
 
 		setIsProcessing(false);
-		setResult(true);
 		// console.log(number);
 	};
 
@@ -139,8 +142,14 @@ const Result = () => {
 		<View className='w-full h-[100%]'>
 			<View className='w-full mt-[20px] bg-white border-[1px] border-[#BBBBBB] d-flex flex-col items-center py-[50px]'>
 				<View
+					onStartShouldSetResponder={() => true}
+					onMoveShouldSetResponder={() => true}
+					onTouchStart={() => setScrollEnabled(false)}
 					onTouchMove={onTouchMove}
-					onTouchEnd={onTouchEnd}>
+					onTouchEnd={onTouchEnd}
+					onResponderTerminationRequest={() => true}
+					scrollEnabled={scrollEnabled}
+				>
 					<ViewShot
 						ref={ref}
 						options={{
@@ -182,14 +191,13 @@ const Result = () => {
 					<Text className='text-white text-center text-[18px]'>Go</Text>
 				</TouchableOpacity>
 			</View>
-			{result && (
-				<Predictions
-					predictions={predictions}
-					isProcessing={isProcessing}
-					submissionCount={submissionCount}
-					imgUrl={promtImg}
-				/>
-			)}
+			<Predictions
+				predictions={predictions}
+				isProcessing={isProcessing}
+				submissionCount={submissionCount}
+				imgUrl={promtImg}
+				discover={false}
+			/>
 		</View>
 	)
 }
