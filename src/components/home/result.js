@@ -14,20 +14,20 @@ const Result = ({
 	promtImg,
 	setPromtImg,
 	submissionCount,
-	setSubmissionCount }) => {
+	setSubmissionCount,
+	setScroll }) => {
 	const [number, onChangeNumber] = useState('');
 	const { height, width } = Dimensions.get('window');
 	const [currentPath, setCurrentPath] = useState([]);
 	const [paths, setPaths] = useState([]);
 	const [error, setError] = useState(null);
 	const [isProcessing, setIsProcessing] = useState(false);
-	const [scrollEnabled, setScrollEnabled] = useState(true);
 
 	//ref for snapshot
 	const ref = useRef(null);
 
 	const onTouchMove = (event) => {
-		setScrollEnabled(false)
+		setScroll(false)
 		const newPath = [...currentPath];
 
 		//get current user touches position
@@ -52,7 +52,7 @@ const Result = ({
 		currentPaths.push(newPath);
 		setPaths(currentPaths);
 		setCurrentPath([]);
-		setScrollEnabled(true)
+		setScroll(true)
 	};
 
 	function sleep(ms) {
@@ -144,11 +144,9 @@ const Result = ({
 				<View
 					onStartShouldSetResponder={() => true}
 					onMoveShouldSetResponder={() => true}
-					onTouchStart={() => setScrollEnabled(false)}
+					onTouchStart={() => setScroll(false)}
 					onTouchMove={onTouchMove}
 					onTouchEnd={onTouchEnd}
-					onResponderTerminationRequest={() => true}
-					scrollEnabled={scrollEnabled}
 				>
 					<ViewShot
 						ref={ref}

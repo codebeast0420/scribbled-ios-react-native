@@ -17,12 +17,14 @@ const Home = () => {
 	const [predictions, setPredictions] = useState({});
 	const [promtImg, setPromtImg] = useState([]);
 	const [submissionCount, setSubmissionCount] = useState(0);
+	const [isScrollEnable, setIsScrollEnable] = useState(true);
 
 	return (
 		<SafeAreaView className='h-[100%]'>
 			<Header />
 			<ScrollView
 				contentInsetAdjustmentBehavior="automatic"
+				scrollEnabled={isScrollEnable}
 			>
 				<View className='mt-[30px] d-flex flex-col items-center px-[15px]'>
 					<View className='d-flex flex-row rounded-sm'>
@@ -41,6 +43,7 @@ const Home = () => {
 							setPromtImg={setPromtImg}
 							submissionCount={submissionCount}
 							setSubmissionCount={setSubmissionCount}
+							setScroll={setIsScrollEnable}
 						/> :
 						<Discover
 							predictions={predictions}
@@ -49,6 +52,7 @@ const Home = () => {
 							setPromtImg={setPromtImg}
 							submissionCount={submissionCount}
 							setSubmissionCount={setSubmissionCount}
+							setScroll={setIsScrollEnable}
 						/>
 					}
 				</View>
