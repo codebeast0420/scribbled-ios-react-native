@@ -17,13 +17,16 @@ const Home = () => {
 	const [predictions, setPredictions] = useState({});
 	const [promtImg, setPromtImg] = useState([]);
 	const [submissionCount, setSubmissionCount] = useState(0);
+	const [isScrollEnable, setIsScrollEnable] = useState(true);
 
 	return (
 		<SafeAreaView className='h-[100%]'>
 			<Header />
 			<ScrollView
 				contentInsetAdjustmentBehavior="automatic"
+				scrollEnabled={isScrollEnable}
 			>
+				<Text className='text-black text-[20px]'>{isScrollEnable ? 'True' : 'False'}</Text>
 				<View className='mt-[30px] d-flex flex-col items-center px-[15px]'>
 					<View className='d-flex flex-row rounded-sm'>
 						<TouchableOpacity className={`${isMy ? 'bg-[#242222]' : 'bg-white'}  border-[#BBBBBB] border-[1px] w-[80px] h-[30px] d-flex flex-row items-center justify-center rounded-bl-sm rounded-tl-sm`} onPress={() => setIsMy(true)}>
@@ -41,6 +44,7 @@ const Home = () => {
 							setPromtImg={setPromtImg}
 							submissionCount={submissionCount}
 							setSubmissionCount={setSubmissionCount}
+							setScroll = {setIsScrollEnable}
 						/> :
 						<Discover
 							predictions={predictions}
@@ -49,6 +53,7 @@ const Home = () => {
 							setPromtImg={setPromtImg}
 							submissionCount={submissionCount}
 							setSubmissionCount={setSubmissionCount}
+							setScroll = {setIsScrollEnable}
 						/>
 					}
 				</View>
