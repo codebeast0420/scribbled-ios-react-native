@@ -154,7 +154,7 @@ const Result = ({
 							format: 'png',
 							quality: 1,
 						}}>
-						<Svg height={'100px'} width={width}>
+						<Svg height={'220px'} width={width}>
 							<Path
 								d={currentPath.join('')}
 								stroke={'red'}
