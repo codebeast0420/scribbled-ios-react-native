@@ -15,7 +15,9 @@ const Result = ({
 	setPromtImg,
 	submissionCount,
 	setSubmissionCount,
-	setScroll }) => {
+	setScroll,
+	balance,
+	setBalance }) => {
 	const [number, onChangeNumber] = useState('');
 	const { height, width } = Dimensions.get('window');
 	const [currentPath, setCurrentPath] = useState([]);
@@ -62,8 +64,7 @@ const Result = ({
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
-
+		setBalance(balance - 1);
 		const prompt = number
 			.split(/\s+/)
 			.map((word) => (naughtyWords.en.includes(word) ? "something" : word))

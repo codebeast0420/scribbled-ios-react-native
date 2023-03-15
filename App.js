@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -25,17 +25,35 @@ const App = () => {
   const Stack = createStackNavigator();
   const isDarkMode = useColorScheme() === 'dark';
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+  const [balance, setBalance] = useState(10);
+  const [isCheck, setIsCheck] = useState(false);
+  const [isReview, setIsReview] = useState(false);
+  const [isShare, setIsShare] = useState(false);
 
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name='Home' component={Home} options={{ headerShown: false }} />
-        <Stack.Screen name='More' component={More} options={{ headerShown: false }} />
-        <Stack.Screen name='Buying' component={Buying} options={{ headerShown: false }} />
-        <Stack.Screen name='Sign' component={SignIn} options={{ headerShown: false }} />
+        <Stack.Screen name='Home' options={{ headerShown: false }}>
+          {props => <Home balance={balance} setBalance={setBalance} />}
+        </Stack.Screen>
+        <Stack.Screen name='More' options={{ headerShown: false }}>
+          {props => <More
+            balance={balance}
+            setBalance={setBalance}
+            isCheck={isCheck}
+            setIsCheck={setIsCheck}
+            isReview={isReview}
+            setIsReview={setIsReview}
+            isShare={isShare}
+            setIsShare={setIsShare}
+          />}
+        </Stack.Screen>
+        <Stack.Screen name='Buying' options={{ headerShown: false }}>
+          {props => <Buying balance={balance} setBalance={setBalance} />}
+        </Stack.Screen>
+        <Stack.Screen name='Sign' options={{ headerShown: false }}>
+          {props => <SignIn balance={balance} setBalance={setBalance} />}
+        </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
