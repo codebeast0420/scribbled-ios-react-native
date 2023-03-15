@@ -12,7 +12,7 @@ import Discover from "../components/home/discover";
 import Header from "../components/home/header";
 import Result from "../components/home/result";
 
-const Home = () => {
+const Home = ({ balance, setBalance }) => {
 	const [isMy, setIsMy] = useState(true);
 	const [predictions, setPredictions] = useState({});
 	const [promtImg, setPromtImg] = useState([]);
@@ -21,7 +21,7 @@ const Home = () => {
 
 	return (
 		<SafeAreaView className='h-[100%]'>
-			<Header />
+			<Header balance={balance} />
 			<ScrollView
 				contentInsetAdjustmentBehavior="automatic"
 				scrollEnabled={isScrollEnable}
@@ -44,6 +44,8 @@ const Home = () => {
 							submissionCount={submissionCount}
 							setSubmissionCount={setSubmissionCount}
 							setScroll={setIsScrollEnable}
+							balance={balance}
+							setBalance={setBalance}
 						/> :
 						<Discover
 							predictions={predictions}

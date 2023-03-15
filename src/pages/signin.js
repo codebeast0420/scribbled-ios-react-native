@@ -2,7 +2,7 @@ import React from "react";
 import { SafeAreaView, View, Text, TouchableOpacity, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-const SignIn = () => {
+const SignIn = ({ balance, setBalance }) => {
 	const navigation = useNavigation();
 	return (
 		<SafeAreaView className='d-flex flex-col items-center bg-white h-[100%]'>

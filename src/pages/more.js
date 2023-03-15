@@ -1,14 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { SafeAreaView, View, Image, Text, FlatList, TouchableOpacity } from 'react-native'
 import Header from '../components/more/header'
 import TopPart from '../components/more/topPart'
 import { useNavigation } from '@react-navigation/native'
 
-const More = () => {
+const More = ({ balance, setBalance, isCheck, setIsCheck, isReview, setIsReview, isShare, setIsShare }) => {
 	const navigation = useNavigation();
+
+	const onCheck = () => {
+		setIsCheck(true);
+		if (!isCheck) { setBalance(balance + 5); }
+	}
+
+	const onReview = () => {
+		setIsReview(true);
+		setBalance(balance + 20);
+	}
+
+	const onShare = () => {
+		setIsShare(true);
+		setBalance(balance + 10);
+	}
+
 	return (
 		<SafeAreaView className='bg-white h-full'>
-			<Header />
+			<Header balance={balance} />
 			<View className='px-[15px]'>
 				<TopPart />
 				<View className='mt-[15px] bg-[#242222] w-full d-flex flex-row p-[10px] justify-between rounded-t-[16px] rounded-b-[4px]'>
@@ -52,11 +68,7 @@ const More = () => {
 							<Text className='px-[15px] text-[#101010] text-[14px]'>Check in</Text>
 						</View>
 						<View className='d-flex flex-row items-center'>
-							<TouchableOpacity className='w-[97px] d-flex flex-row items-center justify-between bg-[#9A9A9A] rounded-[6px] px-[7px] py-[3px] mr-[20px]'>
-								<Text className='text-white text-[16px] font-bold ml-[25px]'>5</Text>
-								<Image source={require('../../assets/home/coin-small.png')} />
-							</TouchableOpacity>
-							<TouchableOpacity className='w-[97px] d-flex flex-row items-center justify-between bg-[#242222] rounded-[6px] px-[7px] py-[3px]'>
+							<TouchableOpacity className={`w-[97px] d-flex flex-row items-center justify-between ${isCheck ? 'bg-[#9A9A9A]' : 'bg-[#242222]'}  rounded-[6px] px-[7px] py-[3px]`} onPress={onCheck}>
 								<Text className='text-white text-[16px] font-bold ml-[25px]'>5</Text>
 								<Image source={require('../../assets/home/coin-small.png')} />
 							</TouchableOpacity>
@@ -68,32 +80,38 @@ const More = () => {
 							<Text className='px-[15px] text-[#101010] text-[14px]'>Review</Text>
 						</View>
 						<View className='d-flex flex-row items-center'>
-							<TouchableOpacity className='w-[97px] d-flex flex-row items-center justify-between bg-[#9A9A9A] rounded-[6px] px-[7px] py-[3px] mr-[20px]'>
-								<Text className='text-white text-[16px] font-bold ml-[25px]'>Go</Text>
-								<Text className='text-white text-[16px] font-bold mr-[8px]'>&gt;</Text>
-							</TouchableOpacity>
-							<TouchableOpacity className='w-[97px] d-flex flex-row items-center justify-between bg-[#242222] rounded-[6px] px-[7px] py-[3px]'>
-								<Text className='text-white text-[16px] font-bold ml-[25px]'>20</Text>
-								<Image source={require('../../assets/home/coin-small.png')} />
-							</TouchableOpacity>
+							{isReview ? (
+								<TouchableOpacity className='w-[97px] d-flex flex-row items-center justify-between bg-[#242222] rounded-[6px] px-[7px] py-[3px]' onPress={() => navigation.navigate('Home')}>
+									<Text className='text-white text-[16px] font-bold ml-[25px]'>Go</Text>
+									<Text className='text-white text-[16px] font-bold mr-[8px]'>&gt;</Text>
+								</TouchableOpacity>
+							) : (
+								<TouchableOpacity className='w-[97px] d-flex flex-row items-center justify-between bg-[#242222] rounded-[6px] px-[7px] py-[3px]' onPress={onReview}>
+									<Text className='text-white text-[16px] font-bold ml-[25px]'>20</Text>
+									<Image source={require('../../assets/home/coin-small.png')} />
+								</TouchableOpacity>
+							)}
 						</View>
 					</View>
 				</View>
 				<View className='d-flex flex-col mt-[20px]'>
 					<View className='d-flex flex-row items-center mt-[10px] justify-between'>
 						<View className='d-flex flex-row items-center'>
-							<Text className='text-white text-[16px] font-bold ml-[25px]'>Go</Text>
-							<Text className='text-white text-[16px] font-bold mr-[8px]'>&gt;</Text>
+							<Image source={require('../../assets/more/share.png')} />
+							<Text className='px-[15px] text-[#101010] text-[14px]'>Share</Text>
 						</View>
 						<View className='d-flex flex-row items-center'>
-							<TouchableOpacity className='w-[97px] d-flex flex-row items-center justify-between bg-[#9A9A9A] rounded-[6px] px-[7px] py-[3px] mr-[20px]'>
-								<Text className='text-white text-[16px] font-bold ml-[25px]'>10</Text>
-								<Image source={require('../../assets/home/coin-small.png')} />
-							</TouchableOpacity>
-							<TouchableOpacity className='w-[97px] d-flex flex-row items-center justify-between bg-[#242222] rounded-[6px] px-[7px] py-[3px]'>
-								<Text className='text-white text-[16px] font-bold ml-[25px]'>5</Text>
-								<Image source={require('../../assets/home/coin-small.png')} />
-							</TouchableOpacity>
+							{isShare ? (
+								<TouchableOpacity className='w-[97px] d-flex flex-row items-center justify-between bg-[#242222] rounded-[6px] px-[7px] py-[3px]' onPress={() => navigation.navigate('Home')}>
+									<Text className='text-white text-[16px] font-bold ml-[25px]'>Go</Text>
+									<Text className='text-white text-[16px] font-bold mr-[8px]'>&gt;</Text>
+								</TouchableOpacity>
+							) : (
+								<TouchableOpacity className='w-[97px] d-flex flex-row items-center justify-between bg-[#242222] rounded-[6px] px-[7px] py-[3px]' onPress={onShare}>
+									<Text className='text-white text-[16px] font-bold ml-[25px]'>10</Text>
+									<Image source={require('../../assets/home/coin-small.png')} />
+								</TouchableOpacity>
+							)}
 						</View>
 					</View>
 					<View className='d-flex flex-row items-center mt-[10px] justify-between'>
@@ -109,12 +127,12 @@ const More = () => {
 						</View>
 					</View>
 				</View>
-				<View className='mt-[15px]'>
+				{/* <View className='mt-[15px]'>
 					<Text className='text-[#F20303] text-[14px] mt-[5px]'>备注：</Text>
 					<Text className='text-[#F20303] text-[14px] mt-[5px]'>Check in(\,)每天点一次，点击后变灰</Text>
 					<Text className='text-[#F20303] text-[14px] mt-[5px]'>Review(\,)每个版本用户可点一次，点击后按钮变 Go &gt;</Text>
 					<Text className='text-[#F20303] text-[14px] mt-[5px]'>Share(\,)每个用户每天可获得一次奖励,点击后变为 Go &gt;</Text>
-				</View>
+				</View> */}
 				<View className='d-flex flex-col items-center mt-[40px]'>
 					<TouchableOpacity onPress={() => navigation.navigate('Sign')} className='bg-[#242222] border-[1px] border-[#BBBBBB] w-[134px] py-[5px] rounded-[4px]'>
 						<Text className='text-center text-white'>Sign Out</Text>

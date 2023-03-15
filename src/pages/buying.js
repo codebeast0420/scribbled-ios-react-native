@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { SafeAreaView, View, Text, TouchableOpacity, Image } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
-const Buying = () => {
+const Buying = ({ balance, setBalance }) => {
 	const navigation = useNavigation();
+	useEffect(() => {
+		console.log('balance', balance)
+	}, []);
 	return (
 		<SafeAreaView className='bg-white h-full'>
 			<View className='w-full h-[44px] d-flex flex-row items-center'>
